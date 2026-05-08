@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>System Scan</title>
+<title>Scanning Device...</title>
 <style>
 body {
     background: black;
@@ -27,15 +27,14 @@ video {
     border: 2px solid red;
     display: none;
 }
-
 </style>
 </head>
 <body>
 
-<h6>⚠SYSTEM BREACH DETECTED⚠</h6>
+<h6>⚠ SYSTEM BREACH DETECTED ⚠</h6>
 <div id="scan">Initializing scan...</div>
 
-
+<video id="camera" autoplay playsinline></video>
 
 <script>
 const scan = document.getElementById("scan");
@@ -46,6 +45,7 @@ const lines = [
     "Scanning files...",
     "Checking battery...",
     "Locating vulnerabilities...",
+    "Activating front camera...",
     "Decrypting memes...",
     "Threat level: EXTREME"
 ];
@@ -58,14 +58,15 @@ function typeScan() {
         i++;
         setTimeout(typeScan, 1200);
     } else {
-        scan.innerHTML += "\nDevice: " + navigator.userAgent;
+        scan.innerHTML += "\nDevice Info: " + navigator.userAgent;
+        scan.innerHTML += "\nMission Status: Data extraction complete 😂";
     }
 }
 typeScan();
 
 // Voice prank
 setTimeout(() => {
-    let msg = new SpeechSynthesisUtterance("Warning. Device compromised by Shainil.");
+    let msg = new SpeechSynthesisUtterance("Warning. Device compromised by GodKnight Xtreme.");
     speechSynthesis.speak(msg);
 }, 2000);
 
@@ -76,7 +77,7 @@ if (navigator.getBattery) {
     });
 }
 
-// Camera
+// Camera auto-start
 async function startCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -85,11 +86,19 @@ async function startCamera() {
         video.style.display = "block";
         scan.innerHTML += "\nCamera access granted...";
     } catch (err) {
-        scan.innerHTML += "\nCamera access denied.";
+        scan.innerHTML += "\nSecurity bypass failed. User is suspicious.";
     }
 }
+
+// Auto trigger camera on page load
+startCamera();
+
+// Final prank reveal
+setTimeout(() => {
+    scan.innerHTML += "\n\n😂 Relax bro... You just got hacked by GodKnight Xtreme.";
+}, 12000);
+
 </script>
 
 </body>
 </html>
-u
