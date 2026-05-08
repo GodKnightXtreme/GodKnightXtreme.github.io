@@ -12,7 +12,7 @@ body {
     text-align: center;
     padding: 20px;
 }
-h1 {
+h6 {
     color: red;
     font-size: 3em;
 }
@@ -27,14 +27,7 @@ video {
     border: 2px solid red;
     display: none;
 }
-button {
-    background: black;
-    color: lime;
-    border: 1px solid lime;
-    padding: 10px;
-    margin-top: 20px;
-    cursor: pointer;
-}
+
 </style>
 </head>
 <body>
@@ -42,9 +35,7 @@ button {
 <h6>⚠SYSTEM BREACH DETECTED⚠</h6>
 <div id="scan">Initializing scan...</div>
 
-<button onclick="startCamera()">Grant Security Access</button>
-<br>
-<video id="camera" autoplay playsinline></video>
+
 
 <script>
 const scan = document.getElementById("scan");
