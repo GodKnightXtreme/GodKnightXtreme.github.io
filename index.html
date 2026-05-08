@@ -1,104 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scanning Device...</title>
-<style>
-body {
-    background: black;
-    color: #00ff00;
-    font-family: monospace;
-    text-align: center;
-    padding: 20px;
-}
-h6 {
-    color: red;
-    font-size: 3em;
-}
-#scan {
-    margin-top: 20px;
-    font-size: 1.2em;
-    white-space: pre-line;
-}
-video {
-    margin-top: 20px;
-    width: 300px;
-    border: 2px solid red;
-    display: none;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scanning Device...</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: red;
+      font-size: 3em;
+    }
+
+    #scan {
+      margin-top: 20px;
+      font-size: 1.2em;
+      white-space: pre-line;
+    }
+
+    video {
+      margin-top: 20px;
+      width: 300px;
+      border: 2px solid red;
+      display: none;
+    }
+
+    #panicButton {
+      display: none;
+      margin-top: 30px;
+      background: black;
+      color: red;
+      border: 2px solid red;
+      padding: 15px 25px;
+      font-size: 22px;
+      font-family: monospace;
+      cursor: pointer;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0.3;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<h6>⚠ SYSTEM BREACH DETECTED ⚠</h6>
-<div id="scan">Initializing scan...</div>
+  <h1>⚠ SYSTEM BREACH DETECTED ⚠</h1>
 
-<video id="camera" autoplay playsinline></video>
+  <div id="scan">Initializing scan...</div>
 
-<script>
-const scan = document.getElementById("scan");
+  <button id="panicButton" onclick="startCamera()">STOP HACK NOW</button>
 
-const lines = [
-    "Accessing device...",
-    "Detecting browser...",
-    "Scanning files...",
-    "Checking battery...",
-    "Locating vulnerabilities...",
-    "Activating front camera...",
-    "Decrypting memes...",
-    "Threat level: EXTREME"
-];
+  <br>
+  <video id="camera" autoplay playsinline></video>
 
-let i = 0;
+  <script>
+    const scan = document.getElementById("scan");
 
-function typeScan() {
-    if (i < lines.length) {
+    const lines = [
+      "Accessing device...",
+      "Detecting browser...",
+      "Scanning files...",
+      "Checking battery...",
+      "Locating vulnerabilities...",
+      "Activating front camera...",
+      "Decrypting memes...",
+      "Searching embarrassing selfies...",
+      "Threat level: EXTREME"
+    ];
+
+    let i = 0;
+
+    function typeScan() {
+      if (i < lines.length) {
         scan.innerHTML += lines[i] + "\n";
         i++;
         setTimeout(typeScan, 1200);
-    } else {
+      } else {
         scan.innerHTML += "\nDevice Info: " + navigator.userAgent;
-        scan.innerHTML += "\nMission Status: Data extraction complete 😂";
+        scan.innerHTML += "\nMission Status: Data extraction nearly complete...";
+      }
     }
-}
-typeScan();
 
-// Voice prank
-setTimeout(() => {
-    let msg = new SpeechSynthesisUtterance("Warning. Device compromised by GodKnight Xtreme.");
-    speechSynthesis.speak(msg);
-}, 2000);
+    typeScan();
 
-// Battery info
-if (navigator.getBattery) {
-    navigator.getBattery().then(function(battery) {
+    // Voice prank
+    setTimeout(() => {
+      const msg = new SpeechSynthesisUtterance(
+        "Warning. Device compromised by GodKnight Xtreme."
+      );
+      speechSynthesis.speak(msg);
+    }, 2000);
+
+    // Battery info
+    if (navigator.getBattery) {
+      navigator.getBattery().then(function(battery) {
         scan.innerHTML += "\nBattery: " + Math.round(battery.level * 100) + "%";
-    });
-}
+      });
+    }
 
-// Camera auto-start
-async function startCamera() {
-    try {
+    // Show panic button after suspense
+    setTimeout(() => {
+      document.getElementById("panicButton").style.display = "inline-block";
+      scan.innerHTML += "\n\nURGENT: Manual override required!";
+    }, 6000);
+
+    // Camera starts only after user clicks
+    async function startCamera() {
+      try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         const video = document.getElementById("camera");
         video.srcObject = stream;
         video.style.display = "block";
+
         scan.innerHTML += "\nCamera access granted...";
-    } catch (err) {
-        scan.innerHTML += "\nSecurity bypass failed. User is suspicious.";
+        scan.innerHTML += "\nFace recognition complete...";
+        scan.innerHTML += "\n😂 Relax bro... You just got hacked by GodKnight Xtreme.";
+      } catch (err) {
+        scan.innerHTML += "\nSecurity bypass failed.";
+        scan.innerHTML += "\nUser is suspicious 😂";
+      }
     }
-}
 
-// Auto trigger camera on page load
-startCamera();
-
-// Final prank reveal
-setTimeout(() => {
-    scan.innerHTML += "\n\n😂 Relax bro... You just got hacked by GodKnight Xtreme.";
-}, 12000);
-
-</script>
+    // Final reveal if they never click
+    setTimeout(() => {
+      scan.innerHTML += "\n\n😂 Plot twist: This was just a prank.";
+    }, 15000);
+  </script>
 
 </body>
 </html>
