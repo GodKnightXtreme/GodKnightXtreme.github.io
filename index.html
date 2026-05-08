@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Scan</title>
+<style>
+body {
+    background: black;
+    color: #00ff00;
+    font-family: monospace;
+    text-align: center;
+    padding: 20px;
+}
+h1 {
+    color: red;
+    font-size: 3em;
+}
+#scan {
+    margin-top: 20px;
+    font-size: 1.2em;
+    white-space: pre-line;
+}
+video {
+    margin-top: 20px;
+    width: 300px;
+    border: 2px solid red;
+    display: none;
+}
+button {
+    background: black;
+    color: lime;
+    border: 1px solid lime;
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>⚠ SYSTEM BREACH DETECTED ⚠</h1>
+<div id="scan">Initializing scan...</div>
+
+<button onclick="startCamera()">Grant Security Access</button>
+<br>
+<video id="camera" autoplay playsinline></video>
+
+<script>
+const scan = document.getElementById("scan");
+
+const lines = [
+    "Accessing device...",
+    "Detecting browser...",
+    "Scanning files...",
+    "Checking battery...",
+    "Locating vulnerabilities...",
+    "Decrypting memes...",
+    "Threat level: EXTREME"
+];
+
+let i = 0;
+
+function typeScan() {
+    if (i < lines.length) {
+        scan.innerHTML += lines[i] + "\n";
+        i++;
+        setTimeout(typeScan, 1200);
+    } else {
+        scan.innerHTML += "\nDevice: " + navigator.userAgent;
+    }
+}
+typeScan();
+
+// Voice prank
+setTimeout(() => {
+    let msg = new SpeechSynthesisUtterance("Warning. Device compromised by Shainil.");
+    speechSynthesis.speak(msg);
+}, 2000);
+
+// Battery info
+if (navigator.getBattery) {
+    navigator.getBattery().then(function(battery) {
+        scan.innerHTML += "\nBattery: " + Math.round(battery.level * 100) + "%";
+    });
+}
+
+// Camera
+async function startCamera() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const video = document.getElementById("camera");
+        video.srcObject = stream;
+        video.style.display = "block";
+        scan.innerHTML += "\nCamera access granted...";
+    } catch (err) {
+        scan.innerHTML += "\nCamera access denied.";
+    }
+}
+</script>
+
+</body>
+</html>
