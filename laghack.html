@@ -46,7 +46,6 @@
 
   @keyframes blink { 50% { opacity: 0; } }
 
-  /* glitch overlay */
   .glitch {
     position: fixed;
     inset: 0;
@@ -60,7 +59,6 @@
     pointer-events: none;
   }
 
-  /* battery */
   .battery {
     position: fixed;
     top: 10px;
@@ -70,33 +68,13 @@
     border: 1px solid white;
     padding: 5px 10px;
   }
-
-  /* fake camera */
-  .camera {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 220px;
-    height: 160px;
-    transform: translate(-50%, -50%);
-    border: 2px solid red;
-    display: none;
-    background: rgba(255,0,0,0.1);
-    color: red;
-    text-align: center;
-    padding-top: 60px;
-  }
-
 </style>
 </head>
 
 <body>
 
 <div class="glitch"></div>
-
 <div class="battery" id="battery">🔋 100%</div>
-
-<div class="camera" id="camera">📸 FRONT CAMERA ACTIVE</div>
 
 <div class="box" id="box">
   <h1>⚠ SYSTEM CHECK ⚠</h1>
@@ -108,23 +86,17 @@
 <script>
 const box = document.getElementById("box");
 const battery = document.getElementById("battery");
-const camera = document.getElementById("camera");
 const line = document.getElementById("line");
 
 let level = 100;
 
-/* 🔋 Fake battery drain */
+/* 🔋 Battery drain */
 setInterval(() => {
   if (level > 1) level -= 1;
   battery.textContent = "🔋 " + level + "%";
 }, 800);
 
-/* 📸 Fake camera popup */
-setTimeout(() => {
-  camera.style.display = "block";
-}, 3000);
-
-/* 🐌 Lag + text chaos */
+/* fake hacking text */
 const fakeTexts = [
   "Scanning storage...",
   "Bypassing firewall...",
@@ -133,50 +105,41 @@ const fakeTexts = [
   "Injecting script..."
 ];
 
+/* 🚨 vibration + shake system */
+function vibratePattern() {
+  if (navigator.vibrate) {
+    navigator.vibrate([200, 100, 200]); // vibration pattern
+  }
+}
+
 setTimeout(() => {
   box.classList.add("shake");
 
   let i = 0;
+
   let interval = setInterval(() => {
-    line.textContent = fakeTexts[Math.floor(Math.random()*fakeTexts.length)];
+    line.textContent = fakeTexts[Math.floor(Math.random() * fakeTexts.length)];
+
+    vibratePattern(); // 🔥 vibration during lag
+
     i++;
 
     if (i > 25) {
       clearInterval(interval);
       box.classList.remove("shake");
+
+      if (navigator.vibrate) navigator.vibrate(0); // stop vibration
+
       line.textContent = "System stable again 😌";
 
       setTimeout(() => {
         alert("Relax 😂 Nothing happened. You just entered the Hacker Zone.");
       }, 1500);
     }
+
   }, 150);
 
 }, 1000);
-
-/* 🚨 Alarm sound */
-let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-function beep() {
-  let osc = audioCtx.createOscillator();
-  let gain = audioCtx.createGain();
-
-  osc.type = "square";
-  osc.frequency.value = 800;
-
-  gain.gain.value = 0.05;
-
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-
-  osc.start();
-  osc.stop(audioCtx.currentTime + 0.15);
-}
-
-/* continuous alarm */
-setTimeout(() => {
-  setInterval(beep, 300);
-}, 2500);
 
 </script>
 
