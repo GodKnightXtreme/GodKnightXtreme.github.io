@@ -68,6 +68,10 @@
     border: 1px solid white;
     padding: 5px 10px;
   }
+
+  .hidden {
+    display: none;
+  }
 </style>
 </head>
 
@@ -80,23 +84,26 @@
   <h1>⚠ SYSTEM HACK ⚠</h1>
   <p id="line">Initializing scan...</p>
   <p class="warning">DEVICE UNDER MONITORING</p>
- 
+
+  <!-- 👇 hidden initially -->
+  <p id="joke" class="hidden">...Just kidding 😂 Shainil's Hacking Zone 😎</p>
 </div>
 
 <script>
 const box = document.getElementById("box");
 const battery = document.getElementById("battery");
 const line = document.getElementById("line");
+const joke = document.getElementById("joke");
 
 let level = 100;
 
-/* 🔋 Battery drain */
+/* 🔋 battery drain */
 setInterval(() => {
   if (level > 1) level -= 1;
   battery.textContent = "🔋 " + level + "%";
 }, 800);
 
-/* fake hacking text */
+/* fake text chaos */
 const fakeTexts = [
   "Scanning storage...",
   "Bypassing firewall...",
@@ -105,10 +112,10 @@ const fakeTexts = [
   "Injecting script..."
 ];
 
-/* 🚨 vibration + shake system */
+/* 📳 vibration */
 function vibratePattern() {
   if (navigator.vibrate) {
-    navigator.vibrate([200, 100, 200]); // vibration pattern
+    navigator.vibrate([200, 100, 200]);
   }
 }
 
@@ -119,8 +126,7 @@ setTimeout(() => {
 
   let interval = setInterval(() => {
     line.textContent = fakeTexts[Math.floor(Math.random() * fakeTexts.length)];
-
-    vibratePattern(); // 🔥 vibration during lag
+    vibratePattern();
 
     i++;
 
@@ -128,19 +134,22 @@ setTimeout(() => {
       clearInterval(interval);
       box.classList.remove("shake");
 
-      if (navigator.vibrate) navigator.vibrate(0); // stop vibration
+      if (navigator.vibrate) navigator.vibrate(0);
 
       line.textContent = "System stable again 😌";
 
       setTimeout(() => {
-        alert("Relax 😂 Nothing happened. You just entered the Hacker Zone.");
+        alert("Relax 😂 Nothing happened. You just entered Shainil's Hacking Zone 😎");
+
+        // 👇 show ONLY AFTER alert closes
+        joke.classList.remove("hidden");
+
       }, 1500);
     }
 
   }, 150);
 
 }, 1000);
-
 </script>
 
 </body>
