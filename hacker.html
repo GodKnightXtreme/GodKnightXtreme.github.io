@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Alert</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: lime;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .box {
+      padding: 25px;
+      border: 2px solid lime;
+      box-shadow: 0 0 20px lime;
+      max-width: 90%;
+      animation: flicker 1s infinite alternate;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin: 8px 0;
+    }
+
+    .warning {
+      color: red;
+      font-weight: bold;
+      font-size: 1.2rem;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    @keyframes flicker {
+      from { box-shadow: 0 0 10px lime; }
+      to { box-shadow: 0 0 25px lime; }
+    }
+
+    .small {
+      margin-top: 15px;
+      color: white;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>⚠ Successfully Accessed Your Device ⚠</h1>
+    <p>Scanning Photos...</p>
+    <p>Reading WhatsApp Chats...</p>
+    <p>Uploading Memes Folder...</p>
+    <p class="warning">DEVICE COMPROMISED</p>
+    <p class="small">...Just kidding 😂<br>Welcome to Shainil's Hacker Zone 😎</p>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      alert("Relax 😂 Nothing happened. You just entered the Hacker Zone.");
+    }, 2500);
+  </script>
+</body>
+</html>
