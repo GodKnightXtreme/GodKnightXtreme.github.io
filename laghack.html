@@ -65,19 +65,6 @@
   .hidden {
     display: none;
   }
-
-  #startBtn {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 15px;
-    background: lime;
-    border: none;
-    font-family: monospace;
-    cursor: pointer;
-    font-weight: bold;
-  }
 </style>
 </head>
 
@@ -85,11 +72,9 @@
 
 <div class="glitch"></div>
 
-<button id="startBtn">START SYSTEM</button>
-
 <div class="box" id="box">
   <h1>⚠ SYSTEM HACK ⚠</h1>
-  <p id="line">Waiting for activation...</p>
+  <p id="line">Initializing scan...</p>
   <p class="warning">DEVICE UNDER MONITORING</p>
 
   <p id="joke" class="hidden">Just kidding 😂 Relax.....</p>
@@ -99,7 +84,6 @@
 const box = document.getElementById("box");
 const line = document.getElementById("line");
 const joke = document.getElementById("joke");
-const startBtn = document.getElementById("startBtn");
 
 const fakeTexts = [
   "Scanning storage...",
@@ -107,18 +91,10 @@ const fakeTexts = [
   "Encrypting memes...",
   "Accessing gallery...",
   "Injecting script...",
-  "Stealing cookies... (just fake 😄)"
+  "Tracing location... (fake 😄)"
 ];
 
-function vibratePattern() {
-  if (navigator.vibrate) {
-    navigator.vibrate([120, 60, 120]);
-  }
-}
-
-startBtn.addEventListener("click", () => {
-  startBtn.style.display = "none";
-
+window.onload = () => {
   box.classList.add("shake");
 
   let i = 0;
@@ -126,11 +102,8 @@ startBtn.addEventListener("click", () => {
   let interval = setInterval(() => {
     line.textContent = fakeTexts[Math.floor(Math.random() * fakeTexts.length)];
 
-    // glitch color shift
-    box.style.filter = `hue-rotate(${Math.random() * 50}deg)`;
-
-    // vibration (random so it feels natural)
-    if (Math.random() > 0.4) vibratePattern();
+    // screen glitch effect
+    box.style.filter = `hue-rotate(${Math.random() * 60}deg)`;
 
     i++;
 
@@ -140,21 +113,17 @@ startBtn.addEventListener("click", () => {
       box.classList.remove("shake");
       box.style.filter = "none";
 
-      if (navigator.vibrate) navigator.vibrate(0);
-
       line.textContent = "System stable again 😌";
 
       setTimeout(() => {
         alert("Nothing happened 🤣. You just entered Shainil's Hacking Zone 😎");
 
-        // show AFTER alert closes
         joke.classList.remove("hidden");
-
       }, 1500);
     }
 
   }, 150);
-});
+};
 </script>
 
 </body>
